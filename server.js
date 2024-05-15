@@ -1,13 +1,18 @@
 import express from 'express';
 import path from 'path';
 import posts from './routes/posts.js'
+import logger from './middleware/logger.js'
 const port = process.env.PORT || 8000;
 
 const app = express();
 
 // Body parser middleware 
 app.use(express.json());  // This will take care of being able to submit row json
-app.use(express.urlencoded({ extended: false })); //...able to submit url encoded data 
+app.use(express.urlencoded({ extended: false })); //...able to submit url encoded data
+
+
+// middleware 
+app.use(logger);
 
 // Routes
 app.use('/api/posts', posts);
