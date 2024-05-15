@@ -1,10 +1,13 @@
-const { publicDecrypt } = require('crypto');
-const express = require('express');
-const path = require('path');
-const posts = require('./routes/posts.js');
+import express from 'express';
+import path from 'path';
+import posts from './routes/posts.js'
 const port = process.env.PORT || 8000;
 
 const app = express();
+
+// Body parser middleware 
+app.use(express.json());  // This will take care of being able to submit row json
+app.use(express.urlencoded({ extended: false })); //...able to submit url encoded data 
 
 // Routes
 app.use('/api/posts', posts);
